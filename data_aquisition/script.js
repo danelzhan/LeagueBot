@@ -57,13 +57,17 @@ function drawRectangle(startX, startY, endX, endY) {
         ctx.rect(x, y, width, height);
         ctx.stroke();
 
-        saveAnnotation()
+        saveAnnotation();
+        updateAnnotatedList(startX, startY, endX, endY);
 
     }
 }
 
+const labels = document.getElementById("label");
+
 function saveAnnotation() {
     var annotation = {
+        label: labels.value,
         startX: startX,
         startY: startY,
         endX: endX,
@@ -74,4 +78,45 @@ function saveAnnotation() {
 
     console.log(annotations);
 
+}
+
+// managing the lists that are annotated
+const annotatedList = document.getElementById("annotations");
+labels.addEventListener("change", () => {restoreAnnotatedList()});
+
+function updateAnnotatedList(startX, startY, endX, endY) {
+    const newAnnotation = document.createElement("div");
+    var text = document.createElement("p");
+    text.innerHTML = "startX: " + startX + " startY: " + startY + " | endX: " + endX + " endY: " + endY;
+    newAnnotation.appendChild(text);
+    annotatedList.appendChild(newAnnotation);
+}
+
+function restoreAnnotatedList() {
+    clearAnnotatedList();
+    for (var i = 0; i < annotations.length; i++) {
+        console.log("it")
+        if (annotations[i].label === labels.value) {
+            console.log(annotations[i]);
+            updateAnnotatedList(annotations[i].startX, annotations[i].startY, annotations[i].endX, annotations[i].endY);
+        }
+    }
+}
+
+function clearAnnotatedList() {
+    annotatedList.replaceChildren();
+}
+
+// creating labels
+const newLabelText = document.getElementById("new_label");
+const addLabelButton = document.getElementById("add_label");
+
+addLabelButton.addEventListener("click", addLabel);
+
+function addLabel() {
+    const newLabel = document.createElement("option");
+    newLabel.attributes.value = newLabelText.value;
+    newLabel.innerHTML = newLabelText.value;
+    labels.appendChild(newLabel);
+    newLabelText.value = "";
 }
