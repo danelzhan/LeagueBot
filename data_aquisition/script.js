@@ -120,3 +120,28 @@ function addLabel() {
     labels.appendChild(newLabel);
     newLabelText.value = "";
 }
+
+
+// manage input data
+document.getElementById('file_input').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const contents = e.target.result;
+            const lines = contents.split('\n');
+            let data = [];
+
+            for (let i = 0; i < lines.length; i++) {
+                const fields = lines[i].split(',');
+                data.push(fields);
+            }
+
+            console.log("data", data);
+            document.getElementById('output').textContent = contents;
+        };
+        reader.readAsText(file)
+    } else {
+        console.log("upload error")
+    }
+});
