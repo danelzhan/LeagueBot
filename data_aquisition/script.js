@@ -1,4 +1,5 @@
-
+import fs from 'fs';
+import path from 'path';
 
 var canvas = document.getElementById("annotate_canvas");
 var ctx = canvas.getContext("2d");
@@ -121,6 +122,7 @@ function addLabel() {
     newLabelText.value = "";
 }
 
+var data = [];
 
 // manage input data
 document.getElementById('file_input').addEventListener('change', function(event) {
@@ -130,9 +132,9 @@ document.getElementById('file_input').addEventListener('change', function(event)
         reader.onload = function(e) {
             const contents = e.target.result;
             const lines = contents.split('\n');
-            let data = [];
+            
 
-            for (let i = 0; i < lines.length; i++) {
+            for (var i = 0; i < lines.length; i++) {
                 const fields = lines[i].split(',');
                 data.push(fields);
             }
@@ -145,3 +147,46 @@ document.getElementById('file_input').addEventListener('change', function(event)
         console.log("upload error")
     }
 });
+
+function updateData(file_address, startX, startY, endX, endY, label) {
+    data[0].push(file_address);
+    data[1].push(startX);
+    data[2].push(startY);
+    data[3].push(endX);
+    data[4].push(endY);
+    data[5].push(label);
+}
+
+var images = []
+
+function getImages() {
+
+    const folderPath = './raw_data';
+
+    try {
+    const filenames = fs.readdirSync(folderPath);
+
+    filenames.forEach((file) => {
+        console.log('Found file or directory:', file);
+        const fullPath = path.join(folderPath, file);
+        
+        // Check if it's a file or directory
+        if (needsAnnotation(file)) {
+            console.log(`'${file}' is a file.`);
+        }
+    });
+    } catch (err) {
+    console.error('Error reading directory:', err);
+    }
+
+
+}
+
+function needsAnnotation(file) {
+    for (var i = 0; i < data[0].length; i++) {
+        if (file === data[0][i]) return false;
+    }
+    return true;
+}
+
+getImages()

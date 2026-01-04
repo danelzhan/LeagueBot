@@ -18,6 +18,7 @@
             <div id="label_section">
                 <select id="label">
                     <option value="team_minion">team_minion (default)</option>
+                    <option value="enemy_minion">enemy_minion</option>
                 </select>
                 <div id="add_label_section">
                     <textarea id="new_label"></textarea>
@@ -31,7 +32,17 @@
             </div>
 
             <div>
+                <button id="next_image">Next Image</button>
+            </div>
+
+            <div>
                 <input type="file" id="file_input" accept=".csv">
+            </div>
+            
+            <div>
+                <div id="output">
+
+                </div>
             </div>
 
         </div>
@@ -40,5 +51,5 @@
         
     </div>
 </body>
-<script src="script.js"></script>
+<script type="module" src="script.js"></script>
 </html>
