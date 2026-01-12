@@ -1,0 +1,25 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0F172A" />
+      <stop offset="1" stop-color="#1E293B" />
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0B1324" />
+      <stop offset="1" stop-color="#1D4ED8" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#sky)" />
+  <rect y="520" width="1200" height="280" fill="url(#floor)" />
+  <circle cx="950" cy="160" r="90" fill="#F59E0B" opacity="0.85" />
+  <rect x="140" y="300" width="240" height="180" fill="#38BDF8" opacity="0.5" />
+  <rect x="450" y="260" width="220" height="260" fill="#F97316" opacity="0.6" />
+  <rect x="740" y="340" width="180" height="180" fill="#A855F7" opacity="0.55" />
+  <path d="M0 520 C 200 460, 380 600, 600 540 C 840 480, 980 620, 1200 540 L 1200 800 L 0 800 Z" fill="#0B1120" opacity="0.8" />
+  <text x="80" y="120" fill="#E2E8F0" font-family="Space Grotesk, sans-serif" font-size="48" opacity="0.9">
+    Placeholder Scene
+  </text>
+  <text x="80" y="170" fill="#94A3B8" font-family="Space Grotesk, sans-serif" font-size="20">
+    Drag to create bounding boxes over the shapes.
+  </text>
+</svg>
